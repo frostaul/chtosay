@@ -1,8 +1,12 @@
 {
-  "rewrites": [
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "headers": [
+        { "key": "Content-Type", "value": "text/html; charset=utf-8" }
+      ]
     }
   ]
 }
