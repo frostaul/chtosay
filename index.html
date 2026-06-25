@@ -141,19 +141,16 @@
 
     async function load() {
         try {
-            const r = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`);
+            const r = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`);
             const text = await r.text();
-            const rows = text.split('\n').slice(1);
-            allData = rows.map(line => {
-                const cols = line.split(',');
-                return {
-                    type: (cols[0]||'').trim().toLowerCase(),
-                    rating: (cols[1]||'').trim().toLowerCase(),
-                    duration: parseInt(cols[2])||0,
-                    title: (cols[3]||'').trim(),
-                    link: (cols[4]||'').trim()
-                };
-            }).filter(item => item.type);
+            const json = JSON.parse(text.match(/{.*}/)[0]);
+            allData = json.table.rows.slice(1).map(row => ({
+                type: (row.c[0]?.v || '').toString().toLowerCase(),
+                rating: (row.c[1]?.v || '').toString().toLowerCase(),
+                duration: parseInt(row.c[2]?.v) || 0,
+                title: (row.c[3]?.v || '').toString(),
+                link: (row.c[4]?.v || '').toString()
+            })).filter(item => item.type);
             document.getElementById('loading').classList.add('hidden');
             go('start');
         } catch(e) {
@@ -184,10 +181,10 @@
         tg.HapticFeedback?.impactOccurred('medium');
         let filtered = allData.filter(i => i.type===type && i.rating===rating);
         if(type==='film') {
-            if(duration==='short') filtered=filtered.filter(i => i.duration <= 119);
+            if(duration==='short') filtered=filtered.filter(i => i.duration > 0 && i.duration <= 119);
             else if(duration==='long') filtered=filtered.filter(i => i.duration >= 120);
         } else {
-            if(duration==='short') filtered=filtered.filter(i => i.duration <= 35);
+            if(duration==='short') filtered=filtered.filter(i => i.duration > 0 && i.duration <= 35);
             else if(duration==='long') filtered=filtered.filter(i => i.duration >= 36);
         }
         display(filtered);
@@ -210,7 +207,7 @@
                 <div class="card">
                     <span class="badge badge-${lastRating}">${lastRating.toUpperCase()}</span>
                     <h3>${pick.title}</h3>
-                    <p class="inf">⏱ ${pick.duration} мин</p>
+                    <p class="inf">⏱ ${pick.duration || '?'} мин</p>
                     <a href="${pick.link}" target="_blank">Смотреть на Кинопоиске →</a>
                 </div>`;
         } else {
