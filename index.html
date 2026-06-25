@@ -9,221 +9,37 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--tg-theme-bg-color, #1a1a1a);
-            color: var(--tg-theme-text-color, #ffffff);
+            background: #1a1a1a;
+            color: #ffffff;
             padding: 16px;
             min-height: 100vh;
         }
         .container { max-width: 420px; margin: 0 auto; }
         h2 { text-align: center; margin: 12px 0; font-size: 21px; }
-        .msg {
-            text-align: center;
-            color: var(--tg-theme-hint-color, #aaa);
-            margin: 8px 0 18px;
-            font-size: 14px;
-            line-height: 1.5;
-            white-space: pre-line;
-        }
         .btn {
-            display: block; width: 100%; padding: 13px 14px; margin: 5px 0;
-            background: var(--tg-theme-button-color, #2ea6ff);
-            color: var(--tg-theme-button-text-color, #ffffff);
-            border: none; border-radius: 12px; font-size: 14px; cursor: pointer;
-            transition: opacity 0.2s; text-align: left;
+            display: block; width: 100%; padding: 13px; margin: 5px 0;
+            background: #2ea6ff; color: #fff; border: none; border-radius: 12px;
+            font-size: 14px; cursor: pointer;
         }
-        .btn:active { opacity: 0.7; }
-        .btn.m { background: var(--tg-theme-secondary-bg-color, #2a2a2a); }
-        .card {
-            background: var(--tg-theme-secondary-bg-color, #2a2a2a);
-            padding: 18px; border-radius: 14px; margin: 10px 0; text-align: center;
-        }
-        .card h3 { font-size: 18px; margin: 6px 0; }
-        .card .inf { color: var(--tg-theme-hint-color, #888); margin: 4px 0; font-size: 13px; }
-        .card a {
-            display: inline-block; color: var(--tg-theme-link-color, #ffd700);
-            text-decoration: none; margin-top: 8px; padding: 8px 16px;
-            background: rgba(255,215,0,0.1); border-radius: 8px; font-weight: 500;
-        }
-        .badge {
-            display: inline-block; padding: 4px 12px; border-radius: 16px;
-            font-size: 12px; font-weight: 700; text-transform: uppercase;
-        }
-        .badge-класс { background: #4CAF50; color: #fff; }
-        .badge-норм { background: #FF9800; color: #fff; }
-        .badge-говно { background: #f44336; color: #fff; }
         .hidden { display: none !important; }
-        .loading { text-align: center; padding: 50px 20px; color: #888; }
-        .spinner {
-            width: 40px; height: 40px;
-            border: 4px solid #333; border-top-color: #ffd700;
-            border-radius: 50%; animation: spin 0.9s linear infinite;
-            margin: 0 auto 14px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .err { text-align: center; padding: 30px; color: #f44336; }
     </style>
 </head>
 <body>
 <div class="container">
-    <div id="loading" class="loading"><div class="spinner"></div><p>Прогреваю проектор...</p></div>
-    <div id="error" class="err hidden"><p>😔 Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
-
-    <div id="start" class="hidden">
+    <div id="start">
         <h2>🎬 Ну, что я могу посоветовать</h2>
-        <p class="msg">Лучший в мире бот, который не осудит, даже если сегодня вечером ты захочешь посмотреть говно.\n\nКанал, откуда это всё взялось: @chtosay</p>
-        <button class="btn" onclick="go('film')">🎬 Давай кино</button>
-        <button class="btn" onclick="go('serial')">📺 Давай сериал</button>
-        <button class="btn" onclick="go('random')">🎲 Давай рандом</button>
-        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4101820242')">🏆 Топ-71 фильмов</button>
-        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4103770503')">🏆 Топ-29 сериалов</button>
+        <p style="text-align:center;">Тестовая версия</p>
+        <button class="btn" onclick="document.getElementById('result').classList.remove('hidden'); document.getElementById('start').classList.add('hidden');">🎬 Давай кино</button>
     </div>
-
-    <div id="film" class="hidden">
-        <h2>🎬 Кино</h2>
-        <p class="msg">Не думай о том, чего хочу я, чего хочет тот парень, твои родители. Чего хочешь ты? Чего ты хочешь? Чего хочешь ты? Чего. Хочешь. Ты? Чего ты хочешь?</p>
-        <button class="btn" onclick="go('filmDuration','класс')">⭐ Хочу посмотреть класс</button>
-        <button class="btn" onclick="go('filmDuration','норм')">👍 Хочу посмотреть норм</button>
-        <button class="btn" onclick="go('filmDuration','говно')">💩 Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
-    </div>
-
-    <div id="filmDuration" class="hidden">
-        <h2>⏱ Длительность</h2>
-        <p class="msg">Какой по длительности?</p>
-        <button class="btn" onclick="show('film',currentRating,'short')">⏱ 2 часа максимум</button>
-        <button class="btn" onclick="show('film',currentRating,'long')">⏳ Длиннее 2 часов</button>
-        <button class="btn m" onclick="go('film')">🏠 Меню</button>
-    </div>
-
-    <div id="serial" class="hidden">
-        <h2>📺 Сериалы</h2>
-        <p class="msg">И только я подумал, что завязал, как они снова затащили меня обратно.</p>
-        <button class="btn" onclick="go('serialDuration','класс')">⭐ Хочу посмотреть класс</button>
-        <button class="btn" onclick="go('serialDuration','норм')">👍 Хочу посмотреть норм</button>
-        <button class="btn" onclick="go('serialDuration','говно')">💩 Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
-    </div>
-
-    <div id="serialDuration" class="hidden">
-        <h2>⏱ Длительность серий</h2>
-        <p class="msg">Сколько должна идти серия?</p>
-        <button class="btn" onclick="show('serial',currentRating,'short')">⏱ Примерно 30 минут</button>
-        <button class="btn" onclick="show('serial',currentRating,'long')">⏳ Можно и по часу</button>
-        <button class="btn m" onclick="go('serial')">🏠 Меню</button>
-    </div>
-
-    <div id="random" class="hidden">
-        <h2>🎲 Рандом</h2>
-        <p class="msg">Рандом любого качества</p>
-        <button class="btn" onclick="randomPick('класс')">⭐ Хочу посмотреть класс</button>
-        <button class="btn" onclick="randomPick('норм')">👍 Хочу посмотреть норм</button>
-        <button class="btn" onclick="randomPick('говно')">💩 Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
-    </div>
-
     <div id="result" class="hidden">
-        <h2 id="resTitle"></h2>
-        <div id="resCard"></div>
-        <button class="btn" onclick="retry()">🔄 Ещё раз</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
+        <h2>🎬 Фильм</h2>
+        <p style="text-align:center;">Тестовый фильм</p>
+        <button class="btn" onclick="document.getElementById('start').classList.remove('hidden'); document.getElementById('result').classList.add('hidden');">🏠 Меню</button>
     </div>
 </div>
-
 <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
-
-    const SHEET_ID = '1sowWXBOQFxvKQS9yHYO8SvHn0BIA3f_95R3jlWL_PLI';
-    let allData = [];
-    let currentRating = '';
-    let lastType = '', lastRating = '', lastDuration = '';
-
-    async function load() {
-        try {
-            const r = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`);
-            const text = await r.text();
-            const json = JSON.parse(text.match(/{.*}/)[0]);
-            allData = json.table.rows.slice(1).map(row => ({
-                type: (row.c[0]?.v || '').toString().toLowerCase(),
-                rating: (row.c[1]?.v || '').toString().toLowerCase(),
-                duration: parseInt(row.c[2]?.v) || 0,
-                title: (row.c[3]?.v || '').toString(),
-                link: (row.c[4]?.v || '').toString()
-            })).filter(item => item.type);
-            document.getElementById('loading').classList.add('hidden');
-            go('start');
-        } catch(e) {
-            document.getElementById('loading').classList.add('hidden');
-            document.getElementById('error').classList.remove('hidden');
-        }
-    }
-
-    function go(screen, rating) {
-        tg.HapticFeedback?.impactOccurred('light');
-        if(rating) currentRating = rating;
-        document.querySelectorAll('#start,#film,#filmDuration,#serial,#serialDuration,#random,#result')
-            .forEach(el => el.classList.add('hidden'));
-        document.getElementById(screen).classList.remove('hidden');
-        if(screen==='start') tg.BackButton?.hide();
-        else {
-            tg.BackButton?.show();
-            tg.BackButton?.onClick(() => {
-                if(screen==='filmDuration' || screen==='serialDuration') go(currentRating? (lastType==='film'?'film':'serial') : 'start');
-                else if(screen==='result') go(lastType==='film'?'filmDuration':'serialDuration');
-                else go('start');
-            });
-        }
-    }
-
-    function show(type, rating, duration) {
-        lastType=type; lastRating=rating; lastDuration=duration;
-        tg.HapticFeedback?.impactOccurred('medium');
-        let filtered = allData.filter(i => i.type===type && i.rating===rating);
-        if(type==='film') {
-            if(duration==='short') filtered=filtered.filter(i => i.duration > 0 && i.duration <= 119);
-            else if(duration==='long') filtered=filtered.filter(i => i.duration >= 120);
-        } else {
-            if(duration==='short') filtered=filtered.filter(i => i.duration > 0 && i.duration <= 35);
-            else if(duration==='long') filtered=filtered.filter(i => i.duration >= 36);
-        }
-        display(filtered);
-    }
-
-    function randomPick(rating) {
-        lastType = Math.random()>0.5?'film':'serial';
-        lastRating = rating;
-        lastDuration = 'any';
-        tg.HapticFeedback?.impactOccurred('medium');
-        display(allData.filter(i => i.rating===rating));
-    }
-
-    function display(filtered) {
-        go('result');
-        if(filtered.length>0) {
-            const pick = filtered[Math.floor(Math.random()*filtered.length)];
-            document.getElementById('resTitle').textContent = (lastType==='film'?'🎬 Фильм':'📺 Сериал');
-            document.getElementById('resCard').innerHTML = `
-                <div class="card">
-                    <span class="badge badge-${lastRating}">${lastRating.toUpperCase()}</span>
-                    <h3>${pick.title}</h3>
-                    <p class="inf">⏱ ${pick.duration || '?'} мин</p>
-                    <a href="${pick.link}" target="_blank">Смотреть на Кинопоиске →</a>
-                </div>`;
-        } else {
-            document.getElementById('resTitle').textContent = '😔';
-            document.getElementById('resCard').innerHTML = '<div class="card"><p>Ничего не найдено</p></div>';
-        }
-    }
-
-    function retry() {
-        if(lastDuration==='any') randomPick(lastRating);
-        else show(lastType, lastRating, lastDuration);
-    }
-
-    function openLink(url) { tg.openLink?.(url) || window.open(url,'_blank'); }
-
-    load();
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
 </script>
 </body>
 </html>
