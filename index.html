@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="ru"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Ну, что я могу посоветовать&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://telegram.org/js/telegram-web-app.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--tg-theme-bg-color, #1a1a1a);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--tg-theme-text-color, #ffffff);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container { max-width: 420px; margin: 0 auto; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>h2 { text-align: center; margin: 12px 0; font-size: 21px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.msg {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--tg-theme-hint-color, #aaa);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 8px 0 18px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>white-space: pre-line;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block; width: 100%; padding: 13px 14px; margin: 5px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--tg-theme-button-color, #2ea6ff);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--tg-theme-button-text-color, #ffffff);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none; border-radius: 12px; font-size: 14px; cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: opacity 0.2s; text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn:active { opacity: 0.7; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn.m { background: var(--tg-theme-secondary-bg-color, #2a2a2a); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--tg-theme-secondary-bg-color, #2a2a2a);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 18px; border-radius: 14px; margin: 10px 0; text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card h3 { font-size: 18px; margin: 6px 0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card .inf { color: var(--tg-theme-hint-color, #888); margin: 4px 0; font-size: 13px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card a {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; color: var(--tg-theme-link-color, #ffd700);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none; margin-top: 8px; padding: 8px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255,215,0,0.1); border-radius: 8px; font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.badge {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; padding: 4px 12px; border-radius: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px; font-weight: 700; text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.badge-класс { background: #4CAF50; color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.badge-норм { background: #FF9800; color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.badge-говно { background: #f44336; color: #fff; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hidden { display: none !important; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loading { text-align: center; padding: 50px 20px; color: #888; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.spinner {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 40px; height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 4px solid #333; border-top-color: #ffd700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%; animation: spin 0.9s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto 14px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin { to { transform: rotate(360deg); } }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.err { text-align: center; padding: 30px; color: #f44336; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1">&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="loading" class="loading"&gt;&lt;div class="spinner"&gt;&lt;/div&gt;&lt;p&gt;Загружаем базу...&lt;/p&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="error" class="err hidden"&gt;&lt;p&gt;😔 Ошибка загрузки&lt;/p&gt;&lt;button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;"&gt;Попробовать снова&lt;/button&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- /Start --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="start" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🎬 Ну, что я могу посоветовать&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="msg"&gt;Лучший в мире бот, который не осудит, даже если сегодня вечером ты захочешь посмотреть говно.\n\nКанал, откуда это всё взялось: @chtosay&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('film')"&gt;🎬 Давай кино&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('serial')"&gt;📺 Давай сериал&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('random')"&gt;🎲 Давай рандом&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4101820242')"&gt;🏆 Топ-71 фильмов&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4103770503')"&gt;🏆 Топ-29 сериалов&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- /Film --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="film" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🎬 Кино&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="msg"&gt;Не думай о том, чего хочу я, чего хочет тот парень, твои родители. Чего хочешь ты? Чего ты хочешь? Чего хочешь ты? Чего. Хочешь. Ты? Чего ты хочешь?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('filmDuration','класс')"&gt;⭐ Хочу посмотреть класс&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('filmDuration','норм')"&gt;👍 Хочу посмотреть норм&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('filmDuration','говно')"&gt;💩 Хочу посмотреть говно&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="go('start')"&gt;🏠 Меню&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- /FilmRatingKlass, /FilmRatingNorm, /FilmRatingGovno → все ведут на выбор длительности --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="filmDuration" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;⏱ Длительность&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="msg"&gt;Какой по длительности?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="show('film',currentRating,'short')"&gt;⏱ 2 часа максимум&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="show('film',currentRating,'long')"&gt;⏳ Длиннее 2 часов&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="go('film')"&gt;🏠 Меню&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- /Serial --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="serial" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;📺 Сериалы&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="msg"&gt;И только я подумал, что завязал, как они снова затащили меня обратно.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('serialDuration','класс')"&gt;⭐ Хочу посмотреть класс&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('serialDuration','норм')"&gt;👍 Хочу посмотреть норм&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="go('serialDuration','говно')"&gt;💩 Хочу посмотреть говно&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="go('start')"&gt;🏠 Меню&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="serialDuration" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;⏱ Длительность серий&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="msg"&gt;Сколько должна идти серия?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="show('serial',currentRating,'short')"&gt;⏱ Примерно 30 минут&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="show('serial',currentRating,'long')"&gt;⏳ Можно и по часу&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="go('serial')"&gt;🏠 Меню&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- /Random --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="random" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🎲 Рандом&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="msg"&gt;Рандом любого качества&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="randomPick('класс')"&gt;⭐ Хочу посмотреть класс&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="randomPick('норм')"&gt;👍 Хочу посмотреть норм&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="randomPick('говно')"&gt;💩 Хочу посмотреть говно&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="go('start')"&gt;🏠 Меню&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Результат --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="result" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 id="resTitle"&gt;&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="resCard"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn" onclick="retry()"&gt;🔄 Ещё раз&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="btn m" onclick="go('start')"&gt;🏠 Меню&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const tg = window.Telegram.WebApp;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tg.ready();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tg.expand();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>const SHEET_ID = '1yIwxqPfZCDbnU9PWd2seC2chdVjhWLH22JCP34cRv74';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let allData = [];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let currentRating = '';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let lastType = '', lastRating = '', lastDuration = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>async function load() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const r = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&amp;gid=0`);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const text = await r.text();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rows = text.split('\n').slice(1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>allData = rows.map(line =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const cols = line.split(',');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>type: (cols[0]||'').trim().toLowerCase(),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>rating: (cols[1]||'').trim().toLowerCase(),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>duration: parseInt(cols[2])||0,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>title: (cols[3]||'').trim(),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>link: (cols[4]||'').trim()</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}).filter(item =&gt; item.type);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('loading').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>go('start');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} catch(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('loading').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('error').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function go(screen, rating) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tg.HapticFeedback?.impactOccurred('light');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(rating) currentRating = rating;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.querySelectorAll('#start,#film,#filmDuration,#serial,#serialDuration,#random,#result')</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.forEach(el =&gt; el.classList.add('hidden'));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById(screen).classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(screen==='start') tg.BackButton?.hide();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tg.BackButton?.show();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tg.BackButton?.onClick(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if(screen==='filmDuration' || screen==='serialDuration') go(currentRating? (lastType==='film'?'film':'serial') : 'start');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if(screen==='result') go(lastType==='film'?'filmDuration':'serialDuration');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else go('start');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function show(type, rating, duration) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lastType=type; lastRating=rating; lastDuration=duration;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tg.HapticFeedback?.impactOccurred('medium');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let filtered = allData.filter(i =&gt; i.type===type &amp;&amp; i.rating===rating);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(type==='film') {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(duration==='short') filtered=filtered.filter(i =&gt; i.duration &lt;= 119);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if(duration==='long') filtered=filtered.filter(i =&gt; i.duration &gt;= 120);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(duration==='short') filtered=filtered.filter(i =&gt; i.duration &lt;= 35);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>else if(duration==='long') filtered=filtered.filter(i =&gt; i.duration &gt;= 36);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>display(filtered);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function randomPick(rating) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lastType = Math.random()&gt;0.5?'film':'serial';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lastRating = rating;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lastDuration = 'any';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tg.HapticFeedback?.impactOccurred('medium');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>display(allData.filter(i =&gt; i.rating===rating));</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function display(filtered) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>go('result');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(filtered.length&gt;0) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const pick = filtered[Math.floor(Math.random()*filtered.length)];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('resTitle').textContent = (lastType==='film'?'🎬 Фильм':'📺 Сериал');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('resCard').innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="badge badge-${lastRating}"&gt;${lastRating.toUpperCase()}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;${pick.title}&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="inf"&gt;⏱ ${pick.duration} мин&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="${pick.link}" target="_blank"&gt;Смотреть на Кинопоиске →&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('resTitle').textContent = '😔';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('resCard').innerHTML = '&lt;div class="card"&gt;&lt;p&gt;Ничего не найдено&lt;/p&gt;&lt;/div&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function retry() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if(lastDuration==='any') randomPick(lastRating);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>else show(lastType, lastRating, lastDuration);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function openLink(url) { tg.openLink?.(url) || window.open(url,'_blank'); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>load();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
