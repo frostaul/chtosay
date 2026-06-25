@@ -65,7 +65,7 @@
 </head>
 <body>
 <div class="container">
-    <div id="loading" class="loading"><div class="spinner"></div><p>Загружаем базу...</p></div>
+    <div id="loading" class="loading"><div class="spinner"></div><p>Прогреваю проектор...</p></div>
     <div id="error" class="err hidden"><p>😔 Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
 
     <div id="start" class="hidden">
@@ -134,14 +134,14 @@
     tg.ready();
     tg.expand();
 
-    const SHEET_ID = '1yIwxqPfZCDbnU9PWd2seC2chdVjhWLH22JCP34cRv74';
+    const SHEET_ID = '1sowWXBOQFxvKQS9yHYO8SvHn0BIA3f_95R3jlWL_PLI';
     let allData = [];
     let currentRating = '';
     let lastType = '', lastRating = '', lastDuration = '';
 
     async function load() {
         try {
-            const r = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`);
+            const r = await fetch(`https://docs.google.com/spreadsheets/d/1sowWXBOQFxvKQS9yHYO8SvHn0BIA3f_95R3jlWL_PLI/export?format=csv&gid=0`);
             const text = await r.text();
             const rows = text.split('\n').slice(1);
             allData = rows.map(line => {
