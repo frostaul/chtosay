@@ -1,0 +1,4 @@
+include:
+  - "*.html"
+mime_type:
+  .html: text/html
