@@ -61,6 +61,18 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         .err { text-align: center; padding: 30px; color: #f44336; }
+        .inp {
+            display: block; width: 100%; padding: 12px 14px; margin: 10px 0;
+            background: var(--tg-theme-bg-color, #1a1a1a);
+            color: var(--tg-theme-text-color, #fff);
+            border: 1px solid #444; border-radius: 10px; font-size: 14px;
+        }
+        .vote { display: flex; gap: 8px; margin-top: 12px; }
+        .vbtn {
+            flex: 1; padding: 10px 6px; border: none; border-radius: 10px;
+            background: rgba(255,255,255,0.08); color: inherit; font-size: 13px; cursor: pointer;
+        }
+        .vbtn:active { opacity: 0.7; }
     </style>
 </head>
 <body>
@@ -76,87 +88,177 @@
         <button class="btn" onclick="go('random')">🎲 Давай рандом</button>
         <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4101820242')">🏆 Топ-71 фильмов</button>
         <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4103770503')">🏆 Топ-29 сериалов</button>
+        <button class="btn m" onclick="go('suggest')">Предложить ну точно класс</button>
+        <button class="btn m" onclick="showWatchingNow()">Смотрю сейчас</button>
+        <button class="btn m" onclick="showWillWatch()">Буду смотреть</button>
     </div>
 
     <div id="film" class="hidden">
         <h2>🎬 Кино</h2>
         <p class="msg">Не думай о том, чего хочу я, чего хочет тот парень, твои родители. Чего хочешь ты? Чего ты хочешь? Чего хочешь ты? Чего. Хочешь. Ты? Чего ты хочешь?</p>
-        <button class="btn" onclick="go('filmDuration','класс')">⭐ Хочу посмотреть класс</button>
-        <button class="btn" onclick="go('filmDuration','норм')">👍 Хочу посмотреть норм</button>
-        <button class="btn" onclick="go('filmDuration','говно')">💩 Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
+        <button class="btn" onclick="go('filmDuration','класс')">Хочу посмотреть класс</button>
+        <button class="btn" onclick="go('filmDuration','норм')">Хочу посмотреть норм</button>
+        <button class="btn" onclick="go('filmDuration','говно')">Хочу посмотреть говно</button>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
     </div>
 
     <div id="filmDuration" class="hidden">
         <h2>⏱ Длительность</h2>
         <p class="msg">Какой по длительности?</p>
-        <button class="btn" onclick="show('film',currentRating,'short')">⏱ 2 часа максимум</button>
-        <button class="btn" onclick="show('film',currentRating,'long')">⏳ Длиннее 2 часов</button>
-        <button class="btn m" onclick="go('film')">🏠 Меню</button>
+        <button class="btn" onclick="show('film',currentRating,'short')">2 часа максимум</button>
+        <button class="btn" onclick="show('film',currentRating,'long')">Дольше 2 часов</button>
+        <button class="btn m" onclick="go('film')">🏠 На главную</button>
     </div>
 
     <div id="serial" class="hidden">
         <h2>📺 Сериалы</h2>
         <p class="msg">И только я подумал, что завязал, как они снова затащили меня обратно.</p>
-        <button class="btn" onclick="go('serialDuration','класс')">⭐ Хочу посмотреть класс</button>
-        <button class="btn" onclick="go('serialDuration','норм')">👍 Хочу посмотреть норм</button>
-        <button class="btn" onclick="go('serialDuration','говно')">💩 Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
+        <button class="btn" onclick="go('serialDuration','класс')">Хочу посмотреть класс</button>
+        <button class="btn" onclick="go('serialDuration','норм')">Хочу посмотреть норм</button>
+        <button class="btn" onclick="go('serialDuration','говно')">Хочу посмотреть говно</button>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
     </div>
 
     <div id="serialDuration" class="hidden">
         <h2>⏱ Длительность серий</h2>
         <p class="msg">Сколько должна идти серия?</p>
-        <button class="btn" onclick="show('serial',currentRating,'short')">⏱ Примерно 30 минут</button>
-        <button class="btn" onclick="show('serial',currentRating,'long')">⏳ Можно и по часу</button>
-        <button class="btn m" onclick="go('serial')">🏠 Меню</button>
+        <button class="btn" onclick="show('serial',currentRating,'short')">Примерно 30 минут</button>
+        <button class="btn" onclick="show('serial',currentRating,'long')">40 минут и дольше</button>
+        <button class="btn m" onclick="go('serial')">🏠 На главную</button>
     </div>
 
     <div id="random" class="hidden">
         <h2>🎲 Рандом</h2>
         <p class="msg">Рандом любого качества</p>
-        <button class="btn" onclick="randomPick('класс')">⭐ Хочу посмотреть класс</button>
-        <button class="btn" onclick="randomPick('норм')">👍 Хочу посмотреть норм</button>
-        <button class="btn" onclick="randomPick('говно')">💩 Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
+        <button class="btn" onclick="randomPick('класс')">Хочу рандомный класс</button>
+        <button class="btn" onclick="randomPick('норм')">Хочу рандомный норм</button>
+        <button class="btn" onclick="randomPick('говно')">💩 Хочу рандомное говно</button>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+    </div>
+
+    <div id="suggest" class="hidden">
+        <h2>💡 Предложить</h2>
+        <p class="msg">Напиши название, обязательно добавлю в свой список</p>
+        <input id="suggestInput" class="inp" type="text" placeholder="Название" maxlength="200">
+        <button class="btn" id="suggestBtn" onclick="sendSuggestion()">Посоветовать</button>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+    </div>
+
+    <div id="watchingNow" class="hidden">
+        <h2>Смотрю сейчас</h2>
+        <div id="watchingNowList"><p class="msg">Загрузка...</p></div>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+    </div>
+
+    <div id="willWatch" class="hidden">
+        <h2>Буду смотреть</h2>
+        <div id="willWatchList"><p class="msg">Загрузка...</p></div>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
     </div>
 
     <div id="result" class="hidden">
         <h2 id="resTitle"></h2>
         <div id="resCard"></div>
         <button class="btn" onclick="retry()">🔄 Ещё раз</button>
-        <button class="btn m" onclick="go('start')">🏠 Меню</button>
+        <button class="btn m" onclick="go('start')">🏠 На главную</button>
     </div>
 </div>
 
 <script>
-    const tg = window.Telegram.WebApp;
+    // Заглушка на случай запуска вне Telegram (например, в превью браузера) —
+    // чтобы страница не падала с ошибкой, если Telegram.WebApp ещё не создан.
+    const tg = (window.Telegram && window.Telegram.WebApp) ? window.Telegram.WebApp : {
+        ready: () => {},
+        expand: () => {},
+        HapticFeedback: { impactOccurred: () => {} },
+        BackButton: { show: () => {}, hide: () => {}, onClick: () => {} },
+        openLink: (url) => window.open(url, '_blank')
+    };
     tg.ready();
     tg.expand();
 
-    const SHEET_ID = '1sowWXBOQFxvKQS9yHYO8SvHn0BIA3f_95R3jlWL_PLI';
+    const SHEET_ID = '1yIwxqPfZCDbnU9PWd2seC2chdVjhWLH22JCP34cRv74';
+    // URL веб-приложения Apps Script (см. Code.gs) — вставьте после развёртывания.
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9GzqcjWjdkNLbxqi5ilhpMNX-T72SA8EEextvYW8ce9jclZ-mvaqX828x6WYOkG7t/exec';
     let allData = [];
+    let voteCounts = {};
+    let currentPick = null;
     let currentRating = '';
     let lastType = '', lastRating = '', lastDuration = '';
 
+    // Общий запрос к листу таблицы, без обработки под конкретную раскладку колонок.
+    async function fetchGvizRows(sheetName) {
+        const sheetParam = sheetName ? `&sheet=${encodeURIComponent(sheetName)}` : '';
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json${sheetParam}`;
+        const r = await fetch(url);
+        const text = await r.text();
+        const jsonStart = text.indexOf('{');
+        const jsonEnd = text.lastIndexOf('}') + 1;
+        const json = JSON.parse(text.substring(jsonStart, jsonEnd));
+        return json.table.rows;
+    }
+
+    // Основной лист: A-название, B-рейтинг, C-тип, D-ссылка, E-длительность.
+    // Строка с заголовком отсеивается не по позиции (первая ли она), а по содержимому:
+    // в колонке "рейтинг" у настоящих данных всегда класс/норм/говно.
+    const VALID_RATINGS = ['класс', 'норм', 'говно'];
+    async function loadSheet(sheetName) {
+        const key = sheetName || '__default__';
+        if (sheetsCache[key]) return sheetsCache[key];
+        const rows = await fetchGvizRows(sheetName);
+        const data = rows.map((row, idx) => ({
+            id: idx + 2, // условный номер строки в таблице — используется как ID тайтла для голосования
+            title: (row.c[0]?.v || '').toString().trim(),
+            rating: (row.c[1]?.v || '').toString().trim().toLowerCase(),
+            type: (row.c[2]?.v || '').toString().trim().toLowerCase(),
+            link: (row.c[3]?.v || '').toString().trim(),
+            duration: parseInt(row.c[4]?.v) || 0
+        })).filter(item => item.type && item.title && VALID_RATINGS.includes(item.rating));
+        sheetsCache[key] = data;
+        return data;
+    }
+
+    // Простой лист с произвольным набором колонок (для списков "смотрю сейчас" /
+    // "буду смотреть") — без слайса первой строки, т.к. в этих листах нет
+    // проблемной дублирующейся строки, как в основном.
+    async function loadCustomSheet(sheetName, columns) {
+        const key = 'custom_' + sheetName;
+        if (sheetsCache[key]) return sheetsCache[key];
+        const rows = await fetchGvizRows(sheetName);
+        const data = rows.map(row => {
+            const obj = {};
+            columns.forEach((col, i) => { obj[col] = (row.c[i]?.v || '').toString().trim(); });
+            return obj;
+        }).filter(item => item.title && item.title.toLowerCase() !== 'название');
+        sheetsCache[key] = data;
+        return data;
+    }
+
+    async function loadVoteCounts() {
+        try {
+            const r = await fetch(`${SCRIPT_URL}?action=counts`);
+            voteCounts = await r.json();
+        } catch (e) {
+            voteCounts = {};
+        }
+    }
+
+    // ID пользователя из Telegram, без какого-либо ввода или авторизации.
+    // Если апп открыт вне Telegram — используется случайный ID, сохранённый локально.
+    function getUserId() {
+        if (tg.initDataUnsafe?.user?.id) return tg.initDataUnsafe.user.id;
+        let id = localStorage.getItem('anonId');
+        if (!id) {
+            id = 'anon_' + Math.random().toString(36).slice(2);
+            try { localStorage.setItem('anonId', id); } catch (e) {}
+        }
+        return id;
+    }
+
     async function load() {
         try {
-            const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-            const r = await fetch(url);
-            const text = await r.text();
-            const jsonStart = text.indexOf('{');
-            const jsonEnd = text.lastIndexOf('}') + 1;
-            const jsonText = text.substring(jsonStart, jsonEnd);
-            const json = JSON.parse(jsonText);
-            
-            allData = json.table.rows.slice(1).map(row => ({
-                title: (row.c[0]?.v || '').toString().trim(),
-                duration: parseInt(row.c[1]?.v) || 0,
-                type: (row.c[2]?.v || '').toString().trim().toLowerCase(),
-                rating: (row.c[3]?.v || '').toString().trim().toLowerCase(),
-                link: (row.c[4]?.v || '').toString().trim()
-            })).filter(item => item.type && item.title);
-            
+            allData = await loadSheet();
+            await loadVoteCounts();
             document.getElementById('loading').classList.add('hidden');
             go('start');
         } catch(e) {
@@ -166,10 +268,102 @@
         }
     }
 
+    async function sendSuggestion() {
+        const input = document.getElementById('suggestInput');
+        const btn = document.getElementById('suggestBtn');
+        const title = input.value.trim();
+        if (!title) return;
+        btn.disabled = true;
+        const original = btn.textContent;
+        btn.textContent = 'Отправляю...';
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    action: 'suggest',
+                    title,
+                    userId: getUserId(),
+                    username: tg.initDataUnsafe?.user?.username || ''
+                })
+            });
+            input.value = '';
+            btn.textContent = '✅ Отправлено';
+            tg.HapticFeedback?.notificationOccurred?.('success');
+            setTimeout(() => { go('start'); btn.textContent = original; btn.disabled = false; }, 900);
+        } catch (e) {
+            btn.textContent = 'Ошибка, попробуйте ещё раз';
+            setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1500);
+        }
+    }
+
+    async function sendVote(id, value) {
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: 'vote', titleId: id, userId: getUserId(), vote: value })
+            });
+            tg.HapticFeedback?.impactOccurred('light');
+            await loadVoteCounts();
+            const c = voteCounts[id] || { agree: 0, disagree: 0 };
+            const a = document.getElementById('agreeCount');
+            const d = document.getElementById('disagreeCount');
+            if (a) a.textContent = c.agree || 0;
+            if (d) d.textContent = c.disagree || 0;
+        } catch (e) {
+            console.error('Vote error:', e);
+        }
+    }
+
+    function shareResult() {
+        if (!currentPick) return;
+        const text = `${lastType === 'film' ? 'Фильм' : 'Сериал'} «${currentPick.title}» — ${lastRating}!`;
+        const url = currentPick.link || 'https://t.me/chtosay';
+        const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+        if (tg.openTelegramLink) tg.openTelegramLink(shareUrl);
+        else window.open(shareUrl, '_blank');
+    }
+
+    function escapeHtml(str) {
+        return (str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function renderSimpleList(containerId, items, showRating) {
+        const c = document.getElementById(containerId);
+        if (!items.length) { c.innerHTML = '<p class="msg">Пока пусто</p>'; return; }
+        c.innerHTML = items.map(it => `
+            <div class="card" style="text-align:left;">
+                <h3 style="margin-bottom:6px;">${escapeHtml(it.title)}</h3>
+                ${showRating && it.rating ? `<span class="badge badge-${it.rating.toLowerCase()}">${it.rating.toUpperCase()}</span>` : ''}
+                ${it.link ? `<div style="margin-top:6px;"><a href="${it.link}" target="_blank">Смотреть на Кинопоиске →</a></div>` : ''}
+            </div>`).join('');
+    }
+
+    async function showWatchingNow() {
+        go('watchingNow');
+        try {
+            const data = await loadCustomSheet('Сейчас смотрю', ['title', 'link', 'rating']);
+            renderSimpleList('watchingNowList', data, true);
+        } catch (e) {
+            document.getElementById('watchingNowList').innerHTML = '<p class="msg">😔 Не удалось загрузить</p>';
+        }
+    }
+
+    async function showWillWatch() {
+        go('willWatch');
+        try {
+            const data = await loadCustomSheet('Буду смотреть', ['title', 'link']);
+            renderSimpleList('willWatchList', data, false);
+        } catch (e) {
+            document.getElementById('willWatchList').innerHTML = '<p class="msg">😔 Не удалось загрузить</p>';
+        }
+    }
+
     function go(screen, rating) {
         tg.HapticFeedback?.impactOccurred('light');
         if(rating) currentRating = rating;
-        document.querySelectorAll('#start,#film,#filmDuration,#serial,#serialDuration,#random,#result')
+        document.querySelectorAll('#start,#film,#filmDuration,#serial,#serialDuration,#random,#suggest,#watchingNow,#willWatch,#result')
             .forEach(el => el.classList.add('hidden'));
         document.getElementById(screen).classList.remove('hidden');
         if(screen==='start') tg.BackButton?.hide();
@@ -209,15 +403,23 @@
         go('result');
         if(filtered.length>0) {
             const pick = filtered[Math.floor(Math.random()*filtered.length)];
-            document.getElementById('resTitle').textContent = (lastType==='film'?'🎬 Фильм':'📺 Сериал');
+            currentPick = pick;
+            const counts = voteCounts[pick.id] || { agree: 0, disagree: 0 };
+            document.getElementById('resTitle').textContent = (lastType==='film'?'Фильм':'Сериал');
             document.getElementById('resCard').innerHTML = `
                 <div class="card">
                     <span class="badge badge-${lastRating}">${lastRating.toUpperCase()}</span>
                     <h3>${pick.title}</h3>
                     <p class="inf">⏱ ${pick.duration || '?'} мин</p>
                     <a href="${pick.link}" target="_blank">Смотреть на Кинопоиске →</a>
+                    <div class="vote">
+                        <button class="vbtn" onclick="sendVote(${pick.id}, 1)">👍 Согл <span id="agreeCount">${counts.agree || 0}</span></button>
+                        <button class="vbtn" onclick="sendVote(${pick.id}, -1)">👎 Не согл <span id="disagreeCount">${counts.disagree || 0}</span></button>
+                    </div>
+                    <button class="btn m" onclick="shareResult()" style="margin-top:10px;">📤 Поделиться</button>
                 </div>`;
         } else {
+            currentPick = null;
             document.getElementById('resTitle').textContent = '😔';
             document.getElementById('resCard').innerHTML = '<div class="card"><p>Ничего не найдено</p></div>';
         }
