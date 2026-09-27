@@ -78,7 +78,7 @@
 <body>
 <div class="container">
     <div id="loading" class="loading"><div class="spinner"></div><p>Прогреваю проектор...</p></div>
-    <div id="error" class="err hidden"><p>😔 Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
+    <div id="error" class="err hidden"><p>Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
 
     <div id="start" class="hidden">
         <h2>🎬 Ну, что я могу посоветовать</h2>
@@ -86,8 +86,8 @@
         <button class="btn" onclick="go('film')">🎬 Давай кино</button>
         <button class="btn" onclick="go('serial')">📺 Давай сериал</button>
         <button class="btn" onclick="go('random')">🎲 Давай рандом</button>
-        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4101820242')">🏆 Топ-71 фильмов</button>
-        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4103770503')">🏆 Топ-29 сериалов</button>
+        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4101820242')">Топ-71 фильмов</button>
+        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4103770503')">Топ-29 сериалов</button>
         <button class="btn m" onclick="go('suggest')">Предложить ну точно класс</button>
         <button class="btn m" onclick="showWatchingNow()">Смотрю сейчас</button>
         <button class="btn m" onclick="showWillWatch()">Буду смотреть</button>
@@ -103,7 +103,7 @@
     </div>
 
     <div id="filmDuration" class="hidden">
-        <h2>⏱ Длительность</h2>
+        <h2>Длительность</h2>
         <p class="msg">Какой по длительности?</p>
         <button class="btn" onclick="show('film',currentRating,'short')">2 часа максимум</button>
         <button class="btn" onclick="show('film',currentRating,'long')">Дольше 2 часов</button>
@@ -137,7 +137,7 @@
     </div>
 
     <div id="suggest" class="hidden">
-        <h2>💡 Предложить</h2>
+        <h2>Предложить</h2>
         <p class="msg">Напиши название, обязательно добавлю в свой список</p>
         <input id="suggestInput" class="inp" type="text" placeholder="Название" maxlength="200">
         <button class="btn" id="suggestBtn" onclick="sendSuggestion()">Посоветовать</button>
