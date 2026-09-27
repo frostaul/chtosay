@@ -80,13 +80,12 @@
 </head>
 <body>
 <div class="container">
-    <div id="toast" class="toast">Спасибо, добавил куда-то в очередь.</div>
     <div id="loading" class="loading"><div class="spinner"></div><p>Прогреваю проектор...</p></div>
     <div id="error" class="err hidden"><p>Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
 
     <div id="start" class="hidden">
         <h2>🎬 Ну, что я могу посоветовать</h2>
-        <p class="msg">Лучший в мире бот, который не осудит, даже если сегодня вечером ты захочешь посмотреть говно.Канал, откуда это всё взялось: <a href="https://t.me/chtosay" target="_blank">@chtosay</a></p>
+        <p class="msg">Лучший в мире бот, который не осудит, даже если сегодня вечером ты захочешь посмотреть говно. Канал, откуда это всё взялось: <a href="https://t.me/chtosay" target="_blank">@chtosay</a></p>
         <button class="btn" onclick="go('film')">🎬 Давай кино</button>
         <button class="btn" onclick="go('serial')">📺 Давай сериал</button>
         <button class="btn" onclick="go('random')">🎲 Давай рандом</button>
@@ -103,7 +102,7 @@
         <button class="btn" onclick="go('filmDuration','класс')">Хочу посмотреть класс</button>
         <button class="btn" onclick="go('filmDuration','норм')">Хочу посмотреть норм</button>
         <button class="btn" onclick="go('filmDuration','говно')">Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 
     <div id="filmDuration" class="hidden">
@@ -111,7 +110,7 @@
         <p class="msg">Какой по длительности?</p>
         <button class="btn" onclick="show('film',currentRating,'short')">2 часа максимум</button>
         <button class="btn" onclick="show('film',currentRating,'long')">Дольше 2 часов</button>
-        <button class="btn m" onclick="go('film')">🏠 На главную</button>
+        <button class="btn m" onclick="go('film')">На главную</button>
     </div>
 
     <div id="serial" class="hidden">
@@ -120,7 +119,7 @@
         <button class="btn" onclick="go('serialDuration','класс')">Хочу посмотреть класс</button>
         <button class="btn" onclick="go('serialDuration','норм')">Хочу посмотреть норм</button>
         <button class="btn" onclick="go('serialDuration','говно')">Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 
     <div id="serialDuration" class="hidden">
@@ -128,7 +127,7 @@
         <p class="msg">Сколько должна идти серия?</p>
         <button class="btn" onclick="show('serial',currentRating,'short')">Примерно 30 минут</button>
         <button class="btn" onclick="show('serial',currentRating,'long')">40 минут и дольше</button>
-        <button class="btn m" onclick="go('serial')">🏠 На главную</button>
+        <button class="btn m" onclick="go('serial')">На главную</button>
     </div>
 
     <div id="random" class="hidden">
@@ -136,8 +135,8 @@
         <p class="msg">Рандом любого качества</p>
         <button class="btn" onclick="randomPick('класс')">Хочу рандомный класс</button>
         <button class="btn" onclick="randomPick('норм')">Хочу рандомный норм</button>
-        <button class="btn" onclick="randomPick('говно')">💩 Хочу рандомное говно</button>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn" onclick="randomPick('говно')">Хочу рандомное говно</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 
     <div id="suggest" class="hidden">
@@ -145,26 +144,26 @@
         <p class="msg">Напиши название, обязательно добавлю в свой список</p>
         <input id="suggestInput" class="inp" type="text" placeholder="Название" maxlength="200">
         <button class="btn" id="suggestBtn" onclick="sendSuggestion()">Посоветовать</button>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 
     <div id="watchingNow" class="hidden">
         <h2>Смотрю сейчас</h2>
         <div id="watchingNowList"><p class="msg">Загрузка...</p></div>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 
     <div id="willWatch" class="hidden">
         <h2>Буду смотреть</h2>
         <div id="willWatchList"><p class="msg">Загрузка...</p></div>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 
     <div id="result" class="hidden">
         <h2 id="resTitle"></h2>
         <div id="resCard"></div>
-        <button class="btn" onclick="retry()">🔄 Ещё раз</button>
-        <button class="btn m" onclick="go('start')">🏠 На главную</button>
+        <button class="btn" onclick="retry()">🔄 Дальше</button>
+        <button class="btn m" onclick="go('start')">На главную</button>
     </div>
 </div>
 
@@ -349,7 +348,7 @@ function renderSimpleList(containerId, items, showRating) {
             <div class="card" style="text-align:left;">
                 ${showRating && it.rating ? `<div style="margin-bottom:8px;"><span class="badge badge-${it.rating.toLowerCase()}">${it.rating.toUpperCase()}</span></div>` : ''}
                 <h3 style="margin-bottom:6px;">${escapeHtml(it.title)}</h3>
-                ${it.link ? `<div style="margin-top:6px;"><a href="${it.link}" target="_blank">Смотреть на Кинопоиске →</a></div>` : ''}
+                ${it.link ? `<div style="margin-top:6px;"><a href="${it.link}" target="_blank">На Кинопоиске →</a></div>` : ''}
             </div>`).join('');
     }
 
@@ -359,7 +358,7 @@ function renderSimpleList(containerId, items, showRating) {
             const data = await loadCustomSheet('Сейчас смотрю', ['title', 'link', 'rating']);
             renderSimpleList('watchingNowList', data, true);
         } catch (e) {
-            document.getElementById('watchingNowList').innerHTML = '<p class="msg">😔 Не удалось загрузить</p>';
+            document.getElementById('watchingNowList').innerHTML = '<p class="msg">Не удалось загрузить</p>';
         }
     }
 
@@ -369,7 +368,7 @@ function renderSimpleList(containerId, items, showRating) {
             const data = await loadCustomSheet('Буду смотреть', ['title', 'link']);
             renderSimpleList('willWatchList', data, false);
         } catch (e) {
-            document.getElementById('willWatchList').innerHTML = '<p class="msg">😔 Не удалось загрузить</p>';
+            document.getElementById('willWatchList').innerHTML = '<p class="msg">Не удалось загрузить</p>';
         }
     }
 
@@ -429,7 +428,7 @@ function renderSimpleList(containerId, items, showRating) {
                         <button class="vbtn" onclick="sendVote(${pick.id}, 1)">👍 Согл <span id="agreeCount">${counts.agree || 0}</span></button>
                         <button class="vbtn" onclick="sendVote(${pick.id}, -1)">👎 Не согл <span id="disagreeCount">${counts.disagree || 0}</span></button>
                     </div>
-                    <button class="btn m" onclick="shareResult()" style="margin-top:10px;">📤 Поделиться</button>
+                    <button class="btn m" onclick="shareResult()" style="margin-top:10px;">Поделиться</button>
                 </div>`;
         } else {
             currentPick = null;
