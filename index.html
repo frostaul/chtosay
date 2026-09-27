@@ -73,10 +73,20 @@
             background: rgba(255,255,255,0.08); color: inherit; font-size: 13px; cursor: pointer;
         }
         .vbtn:active { opacity: 0.7; }
+        .toast {
+    position: fixed; left: 16px; right: 16px; bottom: 24px;
+    background: #4CAF50; color: #fff; padding: 14px 18px;
+    border-radius: 12px; text-align: center; font-size: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    z-index: 999;
+}
+.toast.show { opacity: 1; }
     </style>
 </head>
 <body>
 <div class="container">
+    <div id="toast" class="toast">Спасибо, добавил куда-то в очередь!</div>
     <div id="loading" class="loading"><div class="spinner"></div><p>Прогреваю проектор...</p></div>
     <div id="error" class="err hidden"><p>Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
 
@@ -290,54 +300,61 @@
                 })
             });
             input.value = '';
-            btn.textContent = '✅ Отправлено';
-            tg.HapticFeedback?.notificationOccurred?.('success');
-            setTimeout(() => { go('start'); btn.textContent = original; btn.disabled = false; }, 900);
+showToast();
+tg.HapticFeedback?.notificationOccurred?.('success');
+setTimeout(() => { go('start'); btn.textContent = original; btn.disabled = false; }, 400);
         } catch (e) {
-            btn.textContent = 'Ошибка, попробуйте ещё раз';
+            btn.textContent = 'Ошибка, попробуй ещё раз';
             setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1500);
         }
     }
 
-    async function sendVote(id, value) {
-        try {
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: 'vote', titleId: id, userId: getUserId(), vote: value })
-            });
-            tg.HapticFeedback?.impactOccurred('light');
-            await loadVoteCounts();
-            const c = voteCounts[id] || { agree: 0, disagree: 0 };
-            const a = document.getElementById('agreeCount');
-            const d = document.getElementById('disagreeCount');
-            if (a) a.textContent = c.agree || 0;
-            if (d) d.textContent = c.disagree || 0;
-        } catch (e) {
-            console.error('Vote error:', e);
-        }
+async function sendVote(id, value) {
+    tg.HapticFeedback?.impactOccurred('light');
+    // Обновляем цифры сразу, не дожидаясь ответа сервера.
+    if (!voteCounts[id]) voteCounts[id] = { agree: 0, disagree: 0 };
+    if (value === 1) voteCounts[id].agree++; else voteCounts[id].disagree++;
+    const a = document.getElementById('agreeCount');
+    const d = document.getElementById('disagreeCount');
+    if (a) a.textContent = voteCounts[id].agree;
+    if (d) d.textContent = voteCounts[id].disagree;
+    try {
+        await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'vote', titleId: id, userId: getUserId(), vote: value })
+        });
+    } catch (e) {
+        console.error('Vote error:', e);
     }
+}
 
     function shareResult() {
         if (!currentPick) return;
-        const text = `${lastType === 'film' ? 'Фильм' : 'Сериал'} «${currentPick.title}» — ${lastRating}!`;
+        const text = `${lastType === 'film' ? 'Фильм' : 'Сериал'} «${currentPick.title}» — ${lastRating}.`;
         const url = currentPick.link || 'https://t.me/chtosay';
         const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
         if (tg.openTelegramLink) tg.openTelegramLink(shareUrl);
         else window.open(shareUrl, '_blank');
     }
-
+    
+function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+}
+    
     function escapeHtml(str) {
         return (str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
 
-    function renderSimpleList(containerId, items, showRating) {
+function renderSimpleList(containerId, items, showRating) {
         const c = document.getElementById(containerId);
         if (!items.length) { c.innerHTML = '<p class="msg">Пока пусто</p>'; return; }
         c.innerHTML = items.map(it => `
             <div class="card" style="text-align:left;">
+                ${showRating && it.rating ? `<div style="margin-bottom:8px;"><span class="badge badge-${it.rating.toLowerCase()}">${it.rating.toUpperCase()}</span></div>` : ''}
                 <h3 style="margin-bottom:6px;">${escapeHtml(it.title)}</h3>
-                ${showRating && it.rating ? `<span class="badge badge-${it.rating.toLowerCase()}">${it.rating.toUpperCase()}</span>` : ''}
                 ${it.link ? `<div style="margin-top:6px;"><a href="${it.link}" target="_blank">Смотреть на Кинопоиске →</a></div>` : ''}
             </div>`).join('');
     }
