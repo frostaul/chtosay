@@ -185,6 +185,8 @@
     let currentPick = null;
     let currentRating = '';
     let lastType = '', lastRating = '', lastDuration = '';
+    // Кэш уже загруженных листов, чтобы не запрашивать один и тот же лист дважды.
+    const sheetsCache = {};
 
     // Общий запрос к листу таблицы, без обработки под конкретную раскладку колонок.
     async function fetchGvizRows(sheetName) {
@@ -431,6 +433,11 @@
     }
 
     function openLink(url) { tg.openLink?.(url) || window.open(url,'_blank'); }
+
+    load();
+</script>
+</body>
+</html>
 
     load();
 </script>
