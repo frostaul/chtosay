@@ -68,6 +68,25 @@
         .badge-класс { background: #4CAF50; color: #fff; }
         .badge-норм { background: #FF9800; color: #fff; }
         .badge-говно { background: #f44336; color: #fff; }
+                .rate {
+            display: inline-block; padding: 3px 10px; border-radius: 12px;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.06); color: #aab0c0;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .rate-класс {
+            background: rgba(76,175,80,0.16); color: #93cf97;
+            border-color: rgba(76,175,80,0.35);
+        }
+        .rate-норм {
+            background: rgba(245,197,24,0.14); color: #e3cd7f;
+            border-color: rgba(245,197,24,0.32);
+        }
+        .rate-говно {
+            background: rgba(244,67,54,0.14); color: #e58f88;
+            border-color: rgba(244,67,54,0.32);
+        }
         .hidden { display: none !important; }
         .loading { text-align: center; padding: 50px 20px; color: #888; }
         .spinner {
@@ -379,9 +398,9 @@ function renderSimpleList(containerId, items, showRating) {
         const c = document.getElementById(containerId);
         if (!items.length) { c.innerHTML = '<p class="msg">Пока пусто</p>'; return; }
         c.innerHTML = items.map(it => `
-            <div class="card" style="text-align:left;">
-                ${showRating && it.rating ? `<div style="margin-bottom:8px;"><span class="badge badge-${it.rating.toLowerCase()}">${it.rating.toUpperCase()}</span></div>` : ''}
+                       <div class="card" style="text-align:left;">
                 <h3 style="margin-bottom:6px;">${escapeHtml(it.title)}</h3>
+                ${showRating && it.rating ? `<div style="margin-bottom:4px;"><span class="rate rate-${it.rating.toLowerCase()}">${it.rating.toUpperCase()}</span></div>` : ''}
                 ${it.link ? `<div style="margin-top:6px;"><a href="${it.link}" target="_blank">На Кинопоиске →</a></div>` : ''}
             </div>`).join('');
     }
