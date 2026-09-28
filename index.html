@@ -34,6 +34,7 @@
         .btn:active { opacity: 0.7; }
         .btn.home { background: #f8d3e6; margin-top: 16px; }
         .btn.gold { background: #F5C518; }
+        .btn.green { background: #4EDC41; }
         .btn-group + .btn-group { margin-top: 18px; }
         .card {
             background: var(--tg-theme-secondary-bg-color, #2a2a2a);
@@ -76,24 +77,42 @@
         }
         .vbtn:active { opacity: 0.7; }
         .msg a { color: var(--tg-theme-link-color, #ffd700); }
+        .toast {
+            position: fixed; left: 16px; right: 16px; bottom: 24px;
+            background: #4CAF50; color: #fff; padding: 14px 18px;
+            border-radius: 12px; text-align: center; font-size: 14px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+            opacity: 0; pointer-events: none; transition: opacity 0.25s;
+            z-index: 999;
+        }
+        .toast.show { opacity: 1; }
     </style>
 </head>
 <body>
 <div class="container">
+    <div id="toast" class="toast">✅ Спасибо, обязательно посмотрю!</div>
     <div id="loading" class="loading"><div class="spinner"></div><p>Прогреваю проектор...</p></div>
-    <div id="error" class="err hidden"><p>Ошибка загрузки</p><button class="btn m" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
+    <div id="error" class="err hidden"><p>Ошибка загрузки</p><button class="btn" onclick="location.reload()" style="margin-top:12px;text-align:center;">Попробовать снова</button></div>
 
     <div id="start" class="hidden">
         <h2>🎬 Ну, что я могу посоветовать</h2>
         <p class="msg">Лучший в мире бот, который не осудит, даже если сегодня вечером ты захочешь посмотреть говно. Канал, откуда это всё взялось: <a href="https://t.me/chtosay" target="_blank">@chtosay</a></p>
-        <button class="btn" onclick="go('film')">🎬 Давай кино</button>
-        <button class="btn" onclick="go('serial')">📺 Давай сериал</button>
-        <button class="btn" onclick="go('random')">🎲 Давай рандом</button>
-        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4101820242')">Топ-71 фильмов</button>
-        <button class="btn m" onclick="openLink('https://www.imdb.com/list/ls4103770503')">Топ-29 сериалов</button>
-        <button class="btn m" onclick="go('suggest')">Предложить ну точно класс</button>
-        <button class="btn m" onclick="showWatchingNow()">Смотрю сейчас</button>
-        <button class="btn m" onclick="showWillWatch()">Буду смотреть</button>
+        <div class="btn-group">
+            <button class="btn" onclick="go('film')">🎬 Давай кино</button>
+            <button class="btn" onclick="go('serial')">📺 Давай сериал</button>
+            <button class="btn" onclick="go('random')">🎲 Давай рандом</button>
+        </div>
+        <div class="btn-group">
+            <button class="btn" onclick="go('suggest')">Предложить ну точно класс</button>
+        </div>
+        <div class="btn-group">
+            <button class="btn" onclick="showWatchingNow()">Смотрю сейчас</button>
+            <button class="btn" onclick="showWillWatch()">Буду смотреть</button>
+        </div>
+        <div class="btn-group">
+            <button class="btn gold" onclick="openLink('https://www.imdb.com/list/ls4101820242')">Топ-71 фильмов</button>
+            <button class="btn gold" onclick="openLink('https://www.imdb.com/list/ls4103770503')">Топ-29 сериалов</button>
+        </div>
     </div>
 
     <div id="film" class="hidden">
@@ -102,7 +121,7 @@
         <button class="btn" onclick="go('filmDuration','класс')">Хочу посмотреть класс</button>
         <button class="btn" onclick="go('filmDuration','норм')">Хочу посмотреть норм</button>
         <button class="btn" onclick="go('filmDuration','говно')">Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
     <div id="filmDuration" class="hidden">
@@ -110,7 +129,7 @@
         <p class="msg">Какой по длительности?</p>
         <button class="btn" onclick="show('film',currentRating,'short')">2 часа максимум</button>
         <button class="btn" onclick="show('film',currentRating,'long')">Дольше 2 часов</button>
-        <button class="btn m" onclick="go('film')">На главную</button>
+        <button class="btn home" onclick="go('film')">На главную</button>
     </div>
 
     <div id="serial" class="hidden">
@@ -119,7 +138,7 @@
         <button class="btn" onclick="go('serialDuration','класс')">Хочу посмотреть класс</button>
         <button class="btn" onclick="go('serialDuration','норм')">Хочу посмотреть норм</button>
         <button class="btn" onclick="go('serialDuration','говно')">Хочу посмотреть говно</button>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
     <div id="serialDuration" class="hidden">
@@ -127,7 +146,7 @@
         <p class="msg">Сколько должна идти серия?</p>
         <button class="btn" onclick="show('serial',currentRating,'short')">Примерно 30 минут</button>
         <button class="btn" onclick="show('serial',currentRating,'long')">40 минут и дольше</button>
-        <button class="btn m" onclick="go('serial')">На главную</button>
+        <button class="btn home" onclick="go('serial')">На главную</button>
     </div>
 
     <div id="random" class="hidden">
@@ -136,34 +155,34 @@
         <button class="btn" onclick="randomPick('класс')">Хочу рандомный класс</button>
         <button class="btn" onclick="randomPick('норм')">Хочу рандомный норм</button>
         <button class="btn" onclick="randomPick('говно')">Хочу рандомное говно</button>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
     <div id="suggest" class="hidden">
         <h2>Предложить</h2>
         <p class="msg">Напиши название, обязательно добавлю в свой список</p>
         <input id="suggestInput" class="inp" type="text" placeholder="Название" maxlength="200">
-        <button class="btn" id="suggestBtn" onclick="sendSuggestion()">Посоветовать</button>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn green" id="suggestBtn" onclick="sendSuggestion()">Посоветовать</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
     <div id="watchingNow" class="hidden">
         <h2>Смотрю сейчас</h2>
         <div id="watchingNowList"><p class="msg">Загрузка...</p></div>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
     <div id="willWatch" class="hidden">
         <h2>Буду смотреть</h2>
         <div id="willWatchList"><p class="msg">Загрузка...</p></div>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
     <div id="result" class="hidden">
         <h2 id="resTitle"></h2>
         <div id="resCard"></div>
         <button class="btn" onclick="retry()">🔄 Дальше</button>
-        <button class="btn m" onclick="go('start')">На главную</button>
+        <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 </div>
 
@@ -428,7 +447,7 @@ function renderSimpleList(containerId, items, showRating) {
                         <button class="vbtn" onclick="sendVote(${pick.id}, 1)">👍 Согл <span id="agreeCount">${counts.agree || 0}</span></button>
                         <button class="vbtn" onclick="sendVote(${pick.id}, -1)">👎 Не согл <span id="disagreeCount">${counts.disagree || 0}</span></button>
                     </div>
-                    <button class="btn m" onclick="shareResult()" style="margin-top:10px;">Поделиться</button>
+                    <button class="btn" onclick="shareResult()" style="margin-top:10px;">Поделиться</button>
                 </div>`;
         } else {
             currentPick = null;
