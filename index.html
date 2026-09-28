@@ -55,6 +55,11 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.35);
             padding: 18px; border-radius: 14px; margin: 10px 0; text-align: center;
         }
+                .poster {
+            width: 100%; max-height: 300px; object-fit: contain;
+            border-radius: 10px; margin-bottom: 12px; display: block;
+            background: rgba(255,255,255,0.04);
+        }
         .card h3 { font-size: 18px; margin: 6px 0; }
         .card .inf { color: #8a90a3; margin: 4px 0; font-size: 13px; }
         .card a {
@@ -271,7 +276,8 @@
             rating: (row.c[1]?.v || '').toString().trim().toLowerCase(),
             type: (row.c[2]?.v || '').toString().trim().toLowerCase(),
             link: (row.c[3]?.v || '').toString().trim(),
-            duration: parseInt(row.c[4]?.v) || 0
+                        duration: parseInt(row.c[4]?.v) || 0,
+            poster: (row.c[5]?.v || '').toString().trim()
         })).filter(item => item.type && item.title && VALID_RATINGS.includes(item.rating));
         sheetsCache[key] = data;
         return data;
@@ -474,6 +480,7 @@ function renderSimpleList(containerId, items, showRating) {
             document.getElementById('resTitle').textContent = (lastType==='film'?'Фильм':'Сериал');
             document.getElementById('resCard').innerHTML = `
                 <div class="card">
+                  ${pick.poster ? `<img src="${pick.poster}" class="poster" alt="">` : ''}
                     <span class="badge badge-${lastRating}">${lastRating.toUpperCase()}</span>
                     <h3>${pick.title}</h3>
                     <p class="inf">⏱ ${pick.duration || '?'} мин</p>
