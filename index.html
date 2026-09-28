@@ -40,6 +40,13 @@
         .btn.home { background: #f8d3e6; margin-top: 16px; }
         .btn.gold { background: #F5C518; }
         .btn.green { background: #4EDC41; }
+                .btn.share {
+            display: inline-block; width: auto;
+            padding: 8px 16px; margin: 12px 0 0;
+            background: rgba(255,255,255,0.08);
+            color: #aab0c0;
+            font-size: 13px; font-weight: 500; letter-spacing: 0;
+        }
         .btn-group + .btn-group { margin-top: 18px; }
         .card {
             background: background: #161b2b;
@@ -453,7 +460,7 @@ function renderSimpleList(containerId, items, showRating) {
                         <button class="vbtn" onclick="sendVote(${pick.id}, 1)">👍 Согл <span id="agreeCount">${counts.agree || 0}</span></button>
                         <button class="vbtn" onclick="sendVote(${pick.id}, -1)">👎 Не согл <span id="disagreeCount">${counts.disagree || 0}</span></button>
                     </div>
-                    <button class="btn" onclick="shareResult()" style="margin-top:10px;">Поделиться</button>
+                    <button class="btn share" onclick="shareResult()">Поделиться</button>
                 </div>`;
         } else {
             currentPick = null;
