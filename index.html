@@ -201,7 +201,7 @@
         <h2>Предложить</h2>
         <p class="msg">Напиши название, обязательно добавлю в свой список</p>
         <input id="suggestInput" class="inp" type="text" placeholder="Название" maxlength="200">
-        <button class="btn green" id="suggestBtn" onclick="sendSuggestion()">Посоветовать</button>
+        <button class="btn green" id="suggestBtn" onclick="sendSuggestion()">Посмотри пожалуйста</button>
         <button class="btn home" onclick="go('start')">На главную</button>
     </div>
 
@@ -340,7 +340,7 @@
         if (!title) return;
         btn.disabled = true;
         const original = btn.textContent;
-        btn.textContent = 'Отправляю...';
+        btn.textContent = 'Записываю...';
         try {
             await fetch(SCRIPT_URL, {
                 method: 'POST',
@@ -484,7 +484,7 @@ function renderSimpleList(containerId, items, showRating) {
                     <span class="badge badge-${lastRating}">${lastRating.toUpperCase()}</span>
                     <h3>${pick.title}</h3>
                     <p class="inf">⏱ ${pick.duration || '?'} мин</p>
-                    <a href="${pick.link}" target="_blank">Смотреть на Кинопоиске →</a>
+                    <a href="${pick.link}" target="_blank">На Кинопоиске →</a>
                     <div class="vote">
                         <button class="vbtn" onclick="sendVote(${pick.id}, 1)">👍 Согл <span id="agreeCount">${counts.agree || 0}</span></button>
                         <button class="vbtn" onclick="sendVote(${pick.id}, -1)">👎 Не согл <span id="disagreeCount">${counts.disagree || 0}</span></button>
