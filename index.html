@@ -216,16 +216,17 @@
     const sheetsCache = {};
 
     // Общий запрос к листу таблицы, без обработки под конкретную раскладку колонок.
-    async function fetchGvizRows(sheetName) {
-        const sheetParam = sheetName ? `&sheet=${encodeURIComponent(sheetName)}` : '';
-        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json${sheetParam}`;
-        const r = await fetch(url);
-        const text = await r.text();
-        const jsonStart = text.indexOf('{');
-        const jsonEnd = text.lastIndexOf('}') + 1;
-        const json = JSON.parse(text.substring(jsonStart, jsonEnd));
-        return json.table.rows;
-    }
+    async function fetchGvizRows(sheetName, headers) {
+    const sheetParam = sheetName ? `&sheet=${encodeURIComponent(sheetName)}` : '';
+    const headersParam = headers !== undefined ? `&headers=${headers}` : '';
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json${sheetParam}${headersParam}`;
+    const r = await fetch(url);
+    const text = await r.text();
+    const jsonStart = text.indexOf('{');
+    const jsonEnd = text.lastIndexOf('}') + 1;
+    const json = JSON.parse(text.substring(jsonStart, jsonEnd));
+    return json.table.rows;
+}
 
     // Основной лист: A-название, B-рейтинг, C-тип, D-ссылка, E-длительность.
     // Строка с заголовком отсеивается не по позиции (первая ли она), а по содержимому:
@@ -253,7 +254,7 @@
     async function loadCustomSheet(sheetName, columns) {
         const key = 'custom_' + sheetName;
         if (sheetsCache[key]) return sheetsCache[key];
-        const rows = await fetchGvizRows(sheetName);
+        const rows = await fetchGvizRows(sheetName, 0);
         const data = rows.map(row => {
             const obj = {};
             columns.forEach((col, i) => { obj[col] = (row.c[i]?.v || '').toString().trim(); });
